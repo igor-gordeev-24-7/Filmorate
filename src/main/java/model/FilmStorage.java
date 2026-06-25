@@ -31,6 +31,6 @@ public class FilmStorage {
             films.put(film.getId(), film);
             return film;
         }
-        throw new RuntimeException("Пользователь с id " + film.getId() + " не найден");
+        throw new RuntimeException("Фильм с id " + film.getId() + " не найден");
     }
 }

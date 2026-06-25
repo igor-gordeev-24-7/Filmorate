@@ -1,5 +1,6 @@
-package com.example.filmorate.model;
+package com.example.filmorate.repository;
 
+import com.example.filmorate.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -8,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-public class UserStorage {
+public class UserRepository {
     private final Map<Integer, User> users = new HashMap<>();
     private int currentId = 1;
 

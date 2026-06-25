@@ -25,4 +25,12 @@ public class FilmStorage {
     public Optional<Film> getFilmById(int id) {
         return Optional.ofNullable(films.get(id));
     }
+
+    public Film updateFilm(Film film) {
+        if (films.containsKey(film.getId())){
+            films.put(film.getId(), film);
+            return film;
+        }
+        throw new RuntimeException("Пользователь с id " + film.getId() + " не найден");
+    }
 }

@@ -1,14 +1,12 @@
-package com.example.filmorate.model;
+package com.example.filmorate.repository;
 
+import com.example.filmorate.model.Film;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
-public class FilmStorage {
+public class FilmRepository {
     private final Map<Integer, Film> films = new HashMap<>();
     private int currentId = 1;
 
@@ -18,8 +16,8 @@ public class FilmStorage {
         return film;
     }
 
-    public Collection<Film> getAllFilms() {
-        return films.values();
+    public List<Film> getAllFilms() {
+        return new ArrayList<>(films.values());
     }
 
     public Optional<Film> getFilmById(int id) {

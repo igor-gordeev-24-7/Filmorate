@@ -1,7 +1,7 @@
 package com.example.filmorate.controller;
 
 import com.example.filmorate.model.Film;
-import com.example.filmorate.model.FilmStorage;
+import com.example.filmorate.repository.FilmRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -9,19 +9,24 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/films")
 public class FilmController {
-    private final FilmStorage filmStorage;
+    private final FilmRepository filmRepository;
 
-    public FilmController(FilmStorage filmStorage) {
-        this.filmStorage = filmStorage;
+    public FilmController(FilmRepository filmRepository) {
+        this.filmRepository = filmRepository;
     }
 
     @PostMapping
-    public Film addFilm(@RequestBody Film film) {
-        return filmStorage.addFilm(film);
+    public void addFilm(@RequestBody Film film) {
+        filmRepository.addFilm(film);
     }
 
     @GetMapping
     public Collection<Film> getAllFilms() {
-        return filmStorage.getAllFilms();
+        return filmRepository.getAllFilms();
+    }
+
+    @PutMapping
+    public void updateFilm(Film film) {
+        filmRepository.updateFilm(film);
     }
 }

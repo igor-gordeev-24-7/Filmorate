@@ -1,7 +1,7 @@
-package controller;
+package com.example.filmorate.controller;
 
-import model.Film;
-import model.FilmStorage;
+import com.example.filmorate.model.Film;
+import com.example.filmorate.model.FilmStorage;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package model;
+package com.example.filmorate.model;
 
 import org.springframework.stereotype.Component;
 

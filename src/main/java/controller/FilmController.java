@@ -2,12 +2,12 @@ package controller;
 
 import model.Film;
 import model.FilmStorage;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
+@RestController
+@RequestMapping("/films")
 public class FilmController {
     private final FilmStorage filmStorage;
 

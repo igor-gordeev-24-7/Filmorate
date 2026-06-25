@@ -1,14 +1,29 @@
 package com.example.filmorate.model;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Film {
-    private int id;
+    private Integer id;
+    @NotBlank
     private String name;
+    @Size(max = 50, min = 5)
     private String description;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;
-    private double duration;
+    @Positive
+    private Double duration;
 }

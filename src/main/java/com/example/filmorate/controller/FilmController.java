@@ -25,6 +25,13 @@ public class FilmController {
         return filmRepository.getAllFilms();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Film> getFilmById(@PathVariable int id) {
+        return filmRepository.getFilmById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PutMapping
     public void updateFilm(Film film) {
         filmRepository.updateFilm(film);

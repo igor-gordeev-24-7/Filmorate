@@ -2,6 +2,7 @@ package com.example.filmorate.controller;
 
 import com.example.filmorate.model.User;
 import com.example.filmorate.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -23,6 +24,13 @@ public class UserController {
     @GetMapping
     public Collection<User> getAllUsers() {
         return userRepository.getAllUsers();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable int id) {
+        return userRepository.getUserById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping

@@ -2,6 +2,8 @@ package com.example.filmorate.controller;
 
 import com.example.filmorate.model.Film;
 import com.example.filmorate.repository.FilmRepository;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -16,7 +18,7 @@ public class FilmController {
     }
 
     @PostMapping
-    public void addFilm(@RequestBody Film film) {
+    public void addFilm(@Valid @RequestBody Film film) {
         filmRepository.addFilm(film);
     }
 

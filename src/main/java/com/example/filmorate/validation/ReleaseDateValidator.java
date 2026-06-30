@@ -4,36 +4,52 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Валидатор для проверки даты релиза фильма.
- * Проверяет, что дата не раньше MIN_RELEASE_DATE.
+ * Проверяет, что дата не раньше указанной минимальной даты.
  * <p>
  * Используется совместно с аннотацией {@link ValidReleaseDate}.
- * Если дата равна null, валидация пропускается (проверяется отдельно через {@NotNull}).
  *
  * @see ValidReleaseDate
  * @see ConstraintValidator
  */
 
 public class ReleaseDateValidator implements ConstraintValidator<ValidReleaseDate, LocalDate> {
+    private LocalDate minDate;
+    private String minDateString;
 
-    // Константа с минимальной допустимой датой
-    private static final LocalDate MIN_RELEASE_DATE = LocalDate.of(1895, 12, 28);
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
 
     @Override
     public void initialize(ValidReleaseDate constraintAnnotation) {
-        // Метод инициализации (можно оставить пустым)
+        minDateString = constraintAnnotation.minDate();
+        String pattern = constraintAnnotation.pattern();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+            minDate = LocalDate.parse(minDateString, formatter);
+        } catch (DateTimeParseException e) {
+            minDate = LocalDate.of(1895, 12, 28);
+            minDateString = "1895-12-28";
+        }
     }
 
     @Override
     public boolean isValid(LocalDate date, ConstraintValidatorContext context) {
-        // Если дата null - пропускаем (проверка null отдельно через @NotNull)
         if (date == null) {
             return true;
         }
 
-        // Проверяем, что дата не раньше 28 декабря 1895 года
-        return !date.isBefore(MIN_RELEASE_DATE);
+        if (date.isBefore(minDate)) {
+            // Используем сообщение из аннотации
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate(
+                    context.getDefaultConstraintMessageTemplate()
+            ).addConstraintViolation();
+            return false;
+        }
+
+        return true;
     }
 }

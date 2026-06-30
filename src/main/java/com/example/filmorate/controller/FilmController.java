@@ -3,6 +3,7 @@ package com.example.filmorate.controller;
 import com.example.filmorate.model.Film;
 import com.example.filmorate.repository.FilmRepository;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,9 @@ public class FilmController {
     }
 
     @PostMapping
-    public void addFilm(@Valid @RequestBody Film film) {
-        filmRepository.addFilm(film);
+    public ResponseEntity<Film> addFilm(@Valid @RequestBody Film film) {
+        Film savedFilm = filmRepository.addFilm(film);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedFilm);
     }
 
     @GetMapping

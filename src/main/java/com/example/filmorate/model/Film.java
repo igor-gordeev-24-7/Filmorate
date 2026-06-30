@@ -23,7 +23,7 @@ public class Film {
     @Size(min = 5 ,max = 50, message = "Название фильма должно быть от 1 до 100 символов")
     private String description;
     @NotNull
-    @ValidReleaseDate
+    @ValidReleaseDate(minDate = "1800-12-12")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;
     @Positive(message = "Длительность должна быть положительным числом")

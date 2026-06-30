@@ -17,12 +17,21 @@ import java.lang.annotation.*;
 @Documented
 public @interface ValidReleaseDate {
 
-    // Сообщение об ошибке по умолчанию
-    String message() default "Дата релиза не может быть раньше 28 декабря 1895 года";
+    /**
+     * Минимальная допустимая дата в формате "yyyy-MM-dd".
+     * По умолчанию - 1895-12-28.
+     *
+     * @return минимальная дата в виде строки
+     */
 
-    // Группы валидации (опционально)
+    String minDate() default "1895-12-28";
+
+    String pattern() default "yyyy-MM-dd";
+
+    // Сообщение об ошибке по умолчанию
+    String message() default "Дата релиза не может быть раньше {minDate}";
+
     Class<?>[] groups() default {};
 
-    // Дополнительная информация (опционально)
     Class<? extends Payload>[] payload() default {};
 }

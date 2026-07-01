@@ -1,5 +1,6 @@
 package com.example.filmorate.repository;
 
+import com.example.filmorate.exeption.EntityNotFoundException;
 import com.example.filmorate.model.Film;
 import org.springframework.stereotype.Component;
 
@@ -24,11 +25,11 @@ public class FilmRepository {
         return Optional.ofNullable(films.get(id));
     }
 
-    public Film updateFilm(Film film) {
-        if (films.containsKey(film.getId())){
-            films.put(film.getId(), film);
+    public Film updateFilm(Film film, int id) {
+        if (films.containsKey(id)){
+            films.put(id, film);
             return film;
         }
-        throw new RuntimeException("Фильм с id " + film.getId() + " не найден");
+        throw new EntityNotFoundException("Фильм с id " + film.getId() + " не найден", List.of("Проверьте корректный ли id"));
     }
 }

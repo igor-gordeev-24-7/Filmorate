@@ -1,6 +1,10 @@
 package com.example.filmorate.exeption;
 
+import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.Nullable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,35 +17,17 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
-    /**
-     * Обрабатывает ошибки валидации.
-     * Формирует JSON-ответ с timestamp, статусом 400 и списком ошибок по полям.
-     *
-     * @param ex исключение валидации
-     * @return ResponseEntity с детальным описанием ошибок и статусом BAD_REQUEST
-     */
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
+    @ExceptionHandler({EntityNotFoundException.class})
+    public ResponseEntity<ApiError> handleValidationExceptions(EntityNotFoundException ex, WebRequest request) {
 
-        Map<String, String> errors = new HashMap<>();
-
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.BAD_REQUEST.value());
-        response.put("error", "Ошибка валидации");
-        response.put("errors", errors);
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        ApiError error = new ApiError(ex.getMessage());
+        ex.getErrors().forEach(error::addError);
+        logger.debug(ex.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }

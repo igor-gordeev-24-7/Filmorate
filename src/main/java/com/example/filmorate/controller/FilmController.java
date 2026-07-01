@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/films")
@@ -42,15 +41,7 @@ public class FilmController {
             @PathVariable int id,
             @Valid @RequestBody Film film) {
 
-        film.setId(id);
-
-        Optional<Film> existingFilm = filmRepository.getFilmById(id);
-
-        if (existingFilm.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Film updatedFilm = filmRepository.updateFilm(film);
+        Film updatedFilm = filmRepository.updateFilm(film, id);
         return ResponseEntity.ok(updatedFilm);
     }
 }

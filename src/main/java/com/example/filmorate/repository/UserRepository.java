@@ -1,12 +1,10 @@
 package com.example.filmorate.repository;
 
+import com.example.filmorate.exeption.EntityNotFoundException;
 import com.example.filmorate.model.User;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class UserRepository {
@@ -32,6 +30,6 @@ public class UserRepository {
             users.put(user.getId(), user);
             return user;
         }
-        throw new RuntimeException("Пользователь с id " + user.getId() + " не найден");
+        throw new EntityNotFoundException("Пользователь с id " + user.getId() + " не найден", List.of("Проверьте корректный ли id"));
     }
 }

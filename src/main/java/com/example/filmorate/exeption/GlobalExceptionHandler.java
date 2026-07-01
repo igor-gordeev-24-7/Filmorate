@@ -30,4 +30,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
         logger.debug(ex.getMessage());
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @Override
+    protected @Nullable ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                            HttpHeaders headers,
+                                                                            HttpStatusCode status,
+                                                                            WebRequest request) {
+        ApiError error = new ApiError(ex.getMessage());
+        error.addError("Некорректные аргументы запроса");
+        logger.debug(ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);    }
 }

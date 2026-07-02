@@ -21,8 +21,11 @@ public class UserRepository {
         return users.values();
     }
 
-    public Optional<User> getUserById(int id) {
-        return Optional.ofNullable(users.get(id));
+    public User getUserById(int id) {
+        if (users.containsKey(id)) {
+            return users.get(id);
+        }
+        throw new EntityNotFoundException("Пользователь с id " + users.get(id) + " не найден", List.of("Проверьте корректный ли id"));
     }
 
     public User updateUser(User user) {

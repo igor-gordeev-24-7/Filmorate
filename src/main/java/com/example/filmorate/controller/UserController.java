@@ -34,8 +34,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable int id,
-                           @Valid @RequestBody User user) {
+    public User updateUser(
+            @PathVariable int id,
+            @Valid @RequestBody User user) {
         return userRepository.updateUser(user);
     }
 }

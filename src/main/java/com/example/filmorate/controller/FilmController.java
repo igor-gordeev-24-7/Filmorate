@@ -41,7 +41,7 @@ public class FilmController {
             @PathVariable int id,
             @Valid @RequestBody Film film) {
 
-        Film updatedFilm = filmRepository.updateFilm(film, id);
+        Film updatedFilm = filmRepository.updateFilm(id, film);
         return ResponseEntity.ok(updatedFilm);
     }
 }

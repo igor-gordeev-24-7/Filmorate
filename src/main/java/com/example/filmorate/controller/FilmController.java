@@ -35,11 +35,9 @@ public class FilmController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Film> updateFilm(
+    public Film updateFilm(
             @PathVariable int id,
             @Valid @RequestBody Film film) {
-
-        Film updatedFilm = filmRepository.updateFilm(id, film);
-        return ResponseEntity.ok(updatedFilm);
+        return filmRepository.updateFilm(id, film);
     }
 }

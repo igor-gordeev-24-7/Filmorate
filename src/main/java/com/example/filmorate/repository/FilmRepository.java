@@ -25,7 +25,7 @@ public class FilmRepository {
         if (films.containsKey(id)) {
             return films.get(id);
         }
-        throw new EntityNotFoundException("Фильм с id " + films.get(id) + " не найден", List.of("Проверьте корректный ли id"));
+        throw new EntityNotFoundException("Фильм с id " + id + " не найден", List.of("Проверьте корректный ли id"));
     }
 
     public Film updateFilm( int id, Film film) {

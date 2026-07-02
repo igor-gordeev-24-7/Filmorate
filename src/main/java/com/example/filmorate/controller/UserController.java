@@ -34,19 +34,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(
-            @PathVariable int id,
-            @Valid @RequestBody User user) {
-
-        user.setId(id);
-
-        Optional<User> existingUser = userRepository.getUserById(id);
-
-        if (existingUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        User updatedUser = userRepository.updateUser(user);
-        return ResponseEntity.ok(updatedUser);
+    public User updateUser(@PathVariable int id,
+                           @Valid @RequestBody User user) {
+        return userRepository.updateUser(user);
     }
 }

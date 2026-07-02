@@ -18,7 +18,10 @@ public class FilmRepository {
     }
 
     public List<Film> getAllFilms() {
-        return new ArrayList<>(films.values());
+        if (!films.isEmpty()) {
+            return new ArrayList<>(films.values());
+        }
+        throw new EntityNotFoundException("Фильмы не найдены", List.of("Cписок пуст"));
     }
 
     public Film getFilmById(int id) {

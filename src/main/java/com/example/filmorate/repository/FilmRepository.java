@@ -34,6 +34,6 @@ public class FilmRepository {
             films.put(id, film);
             return film;
         }
-        throw new EntityNotFoundException("Фильм с id " + film.getId() + " не найден", List.of("Проверьте корректный ли id"));
+        throw new EntityNotFoundException("Фильм с id " + id + " не найден", List.of("Проверьте корректный ли id"));
     }
 }

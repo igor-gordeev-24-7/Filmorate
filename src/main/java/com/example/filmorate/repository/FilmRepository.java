@@ -25,8 +25,9 @@ public class FilmRepository {
         return Optional.ofNullable(films.get(id));
     }
 
-    public Film updateFilm(Film film, int id) {
+    public Film updateFilm( int id, Film film) {
         if (films.containsKey(id)){
+            film.setId(id);
             films.put(id, film);
             return film;
         }

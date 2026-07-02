@@ -21,8 +21,11 @@ public class FilmRepository {
         return new ArrayList<>(films.values());
     }
 
-    public Optional<Film> getFilmById(int id) {
-        return Optional.ofNullable(films.get(id));
+    public Film getFilmById(int id) {
+        if (films.containsKey(id)) {
+            return films.get(id);
+        }
+        throw new EntityNotFoundException("Фильм с id " + films.get(id) + " не найден", List.of("Проверьте корректный ли id"));
     }
 
     public Film updateFilm( int id, Film film) {

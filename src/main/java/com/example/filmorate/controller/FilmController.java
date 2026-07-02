@@ -30,10 +30,8 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Film> getFilmById(@PathVariable int id) {
-        return filmRepository.getFilmById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Film getFilmById(@PathVariable int id) {
+        return filmRepository.getFilmById(id);
     }
 
     @PutMapping("/{id}")

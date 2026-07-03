@@ -18,7 +18,10 @@ public class UserRepository {
     }
 
     public Collection<User> getAllUsers() {
-        return users.values();
+        if (!users.isEmpty()) {
+            return new ArrayList<>(users.values());
+        }
+        throw new EntityNotFoundException("Пользователи не найдены", List.of("Cписок пуст"));
     }
 
     public User getUserById(int id) {

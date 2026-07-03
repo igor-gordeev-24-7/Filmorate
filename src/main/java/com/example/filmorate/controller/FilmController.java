@@ -40,4 +40,14 @@ public class FilmController {
             @Valid @RequestBody Film film) {
         return filmRepository.updateFilm(id, film);
     }
+
+    @DeleteMapping()
+    public ResponseEntity deleteFilms() {
+        return inMemoryFilmStorage.deleteFilms();
+    }
+
+    @DeleteMapping("/{id}")
+    public Film deleteFilmById(@PathVariable int id) {
+        return inMemoryFilmStorage.deleteFilmById(id);
+    }
 }

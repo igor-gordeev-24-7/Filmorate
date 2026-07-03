@@ -10,6 +10,6 @@ public interface FilmStorage {
     List<Film> getAllFilms();
     Film getFilmById(int id);
     Film updateFilm( int id, Film film);
-    ResponseEntity<Film> deleteFilms();
+    void deleteFilms();
     Film deleteFilmById(int id);
 }

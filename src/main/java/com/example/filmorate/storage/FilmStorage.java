@@ -1,14 +1,15 @@
 package com.example.filmorate.storage;
 
 import com.example.filmorate.model.Film;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface FilmStorage {
-    public Film addFilm(Film film);
-    public List<Film> getAllFilms();
-    public Film getFilmById(int id);
-    public Film updateFilm( int id, Film film);
-    public Film deleteFilms();
-    public Film deleteFilmById();
+    Film addFilm(Film film);
+    List<Film> getAllFilms();
+    Film getFilmById(int id);
+    Film updateFilm( int id, Film film);
+    ResponseEntity<Film> deleteFilms();
+    Film deleteFilmById(int id);
 }

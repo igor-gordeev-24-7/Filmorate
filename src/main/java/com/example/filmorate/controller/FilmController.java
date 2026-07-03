@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/films")
@@ -42,9 +43,9 @@ public class FilmController {
     }
 
     @DeleteMapping()
-    public ResponseEntity deleteFilms() {
+    public ResponseEntity<Map<String, String>> deleteFilms() {
         inMemoryFilmStorage.deleteFilms();
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(Map.of("message", "Все записи успешно удалены"));
     }
 
     @DeleteMapping("/{id}")

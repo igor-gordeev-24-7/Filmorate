@@ -39,6 +39,6 @@ public class UserController {
     public User updateUser(
             @PathVariable int id,
             @Valid @RequestBody User user) {
-        return userRepository.updateUser(user);
+        return userRepository.updateUser(id, user);
     }
 }

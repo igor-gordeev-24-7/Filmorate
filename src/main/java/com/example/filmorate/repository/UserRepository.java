@@ -31,11 +31,12 @@ public class UserRepository {
         throw new EntityNotFoundException("Пользователь с id " + users.get(id) + " не найден", List.of("Проверьте корректный ли id"));
     }
 
-    public User updateUser(User user) {
-        if (users.containsKey(user.getId())) {
-            users.put(user.getId(), user);
+    public User updateUser(int id ,User user) {
+        if (users.containsKey(id)) {
+            user.setId(id);
+            users.put(id, user);
             return user;
         }
-        throw new EntityNotFoundException("Пользователь с id " + user.getId() + " не найден", List.of("Проверьте корректный ли id"));
+        throw new EntityNotFoundException("Пользователь с id " + id + " не найден", List.of("Проверьте корректный ли id"));
     }
 }

@@ -1,7 +1,6 @@
 package com.example.filmorate.storage;
 
 import com.example.filmorate.exeption.EntityNotFoundException;
-import com.example.filmorate.model.Film;
 import com.example.filmorate.model.User;
 import org.springframework.stereotype.Component;
 

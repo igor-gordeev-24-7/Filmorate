@@ -43,7 +43,8 @@ public class FilmController {
 
     @DeleteMapping()
     public ResponseEntity deleteFilms() {
-        return inMemoryFilmStorage.deleteFilms();
+        inMemoryFilmStorage.deleteFilms();
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

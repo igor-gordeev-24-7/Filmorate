@@ -1,14 +1,14 @@
 package com.example.filmorate.storage;
 
-import org.apache.catalina.User;
+import com.example.filmorate.model.User;
 
 import java.util.List;
 
 public interface UserStorage {
-    public User addUser(User user);
-    public List<User> getAllUsers();
-    public User getUserById(int id);
-    public User updateUser( int id, User user);
-    public User deleteUsers();
-    public User deleteUserById();
+    User addUser(User user);
+    List<User> getAllUsers();
+    User getUserById(int id);
+    User updateUser( int id, User user);
+    void deleteUsers();
+    User deleteUserById(int id);
 }

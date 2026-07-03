@@ -1,7 +1,7 @@
 package com.example.filmorate.controller;
 
 import com.example.filmorate.model.Film;
-import com.example.filmorate.storage.InMemoryFilmStorage;
+import com.example.filmorate.storage.film.InMemoryFilmStorage;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

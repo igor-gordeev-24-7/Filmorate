@@ -1,7 +1,7 @@
 package com.example.filmorate.controller;
 
 import com.example.filmorate.model.User;
-import com.example.filmorate.storage.InMemoryUserStorage;
+import com.example.filmorate.storage.user.InMemoryUserStorage;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

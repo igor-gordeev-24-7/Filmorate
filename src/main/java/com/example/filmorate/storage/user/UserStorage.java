@@ -1,4 +1,4 @@
-package com.example.filmorate.storage;
+package com.example.filmorate.storage.user;
 
 import com.example.filmorate.model.User;
 

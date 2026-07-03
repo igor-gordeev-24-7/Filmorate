@@ -1,7 +1,6 @@
-package com.example.filmorate.storage;
+package com.example.filmorate.storage.film;
 
 import com.example.filmorate.model.Film;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

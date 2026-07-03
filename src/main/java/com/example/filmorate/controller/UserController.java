@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user) {
+    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
         User savedUser = inMemoryUserStorage.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }

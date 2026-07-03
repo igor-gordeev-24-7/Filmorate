@@ -1,4 +1,4 @@
-package com.example.filmorate.interfaces;
+package com.example.filmorate.storage;
 
 import org.apache.catalina.User;
 

@@ -11,8 +11,8 @@ import java.util.Map;
 
 @Component
 public class InMemoryUserStorage implements UserStorage {
-    private final Map<Integer, User> users = new HashMap<>();
-    private int currentId = 1;
+    private final Map<Long, User> users = new HashMap<>();
+    private Long currentId = 1L;
 
     @Override
     public User addUser(User user) {
@@ -32,7 +32,7 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(Long id) {
         if (users.containsKey(id)) {
             return users.get(id);
         }
@@ -42,7 +42,7 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public User updateUser(int id, User user) {
+    public User updateUser(Long id, User user) {
         if (users.containsKey(id)){
             user.setId(id);
             users.put(id, user);
@@ -64,7 +64,7 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public User deleteUserById(int id) {
+    public User deleteUserById(Long id) {
         if (users.containsKey(id)) {
             return users.remove(id);
         }

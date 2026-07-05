@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Film {
 
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "Название фильма не может быть пустым")
     @Size(min = 1, max = 30, message = "Название фильма должно быть от 1 до 30 символов")

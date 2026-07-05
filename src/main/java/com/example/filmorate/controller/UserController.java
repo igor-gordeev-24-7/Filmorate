@@ -31,13 +31,13 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable int id) {
+    public User getUserById(@PathVariable Long id) {
         return inMemoryUserStorage.getUserById(id);
     }
 
     @PutMapping("/{id}")
     public User updateUser(
-            @PathVariable int id,
+            @PathVariable Long id,
             @Valid @RequestBody User user) {
         return inMemoryUserStorage.updateUser(id, user);
     }
@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public User deleteUserById(@PathVariable int id) {
+    public User deleteUserById(@PathVariable Long id) {
         return inMemoryUserStorage.deleteUserById(id);
     }
 }

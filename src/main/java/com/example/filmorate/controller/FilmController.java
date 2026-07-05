@@ -31,13 +31,13 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public Film getFilmById(@PathVariable int id) {
+    public Film getFilmById(@PathVariable Long id) {
         return inMemoryFilmStorage.getFilmById(id);
     }
 
     @PutMapping("/{id}")
     public Film updateFilm(
-            @PathVariable int id,
+            @PathVariable Long id,
             @Valid @RequestBody Film film) {
         return inMemoryFilmStorage.updateFilm(id, film);
     }
@@ -49,7 +49,7 @@ public class FilmController {
     }
 
     @DeleteMapping("/{id}")
-    public Film deleteFilmById(@PathVariable int id) {
+    public Film deleteFilmById(@PathVariable Long id) {
         return inMemoryFilmStorage.deleteFilmById(id);
     }
 }

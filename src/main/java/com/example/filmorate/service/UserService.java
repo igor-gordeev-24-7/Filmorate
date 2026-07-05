@@ -3,12 +3,14 @@ package com.example.filmorate.service;
 import com.example.filmorate.exeption.EntityNotFoundException;
 import com.example.filmorate.model.User;
 import com.example.filmorate.storage.user.UserStorage;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
 public class UserService {
     private final UserStorage userStorage;
 

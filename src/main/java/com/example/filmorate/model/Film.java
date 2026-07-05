@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,4 +37,6 @@ public class Film {
     @DecimalMin(value = "1.0", message = "Минимальная длительность - 1 минута")
     @DecimalMax(value = "600.0", message = "Максимальная длительность - 600 минут")
     private Double duration;
+
+    private Set<Long> likes = new HashSet<>();
 }

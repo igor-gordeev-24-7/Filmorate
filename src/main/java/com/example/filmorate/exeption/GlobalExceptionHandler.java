@@ -35,4 +35,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
         error.addError("Некорректные аргументы запроса");
         logger.debug(ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);    }
+
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ResponseEntity<ApiError> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
+        ApiError error = new ApiError("Некорректный запрос");
+        error.addError(ex.getMessage());
+        logger.debug(ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.filmorate.controller;
 
 import com.example.filmorate.model.Film;
+import com.example.filmorate.service.FilmService;
 import com.example.filmorate.storage.film.InMemoryFilmStorage;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -8,15 +9,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/films")
 public class FilmController {
     private final InMemoryFilmStorage inMemoryFilmStorage;
+    private final FilmService filmService;
 
-    public FilmController(InMemoryFilmStorage inMemoryFilmStorage) {
+    public FilmController(InMemoryFilmStorage inMemoryFilmStorage, FilmService filmService) {
         this.inMemoryFilmStorage = inMemoryFilmStorage;
+        this.filmService = filmService;
     }
 
     @PostMapping
@@ -51,5 +55,21 @@ public class FilmController {
     @DeleteMapping("/{id}")
     public Film deleteFilmById(@PathVariable Long id) {
         return inMemoryFilmStorage.deleteFilmById(id);
+    }
+
+    @PutMapping("/{id}/like/{userId}")
+    public void addLike(@PathVariable Long id, @PathVariable Long userId) {
+        filmService.addLike(id, userId);
+    }
+
+    @DeleteMapping("/{id}/like/{userId}")
+    public void removeLike(@PathVariable Long id, @PathVariable Long userId) {
+        filmService.removeLike(id, userId);
+    }
+
+    @GetMapping("/popular")
+    public List<Film> getTopPopularFilms(
+            @RequestParam(defaultValue = "10") Integer count) {
+        return filmService.getTopPopularFilms(count);
     }
 }

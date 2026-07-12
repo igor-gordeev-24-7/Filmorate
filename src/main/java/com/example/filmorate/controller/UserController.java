@@ -39,11 +39,9 @@ public class UserController {
         return inMemoryUserStorage.getUserById(id);
     }
 
-    @PutMapping("/{id}")
-    public User updateUser(
-            @PathVariable Long id,
-            @Valid @RequestBody User user) {
-        return inMemoryUserStorage.updateUser(id, user);
+    @PutMapping()
+    public User updateUser(@Valid @RequestBody User user) {
+        return inMemoryUserStorage.updateUser(user.getId(), user);
     }
 
     @DeleteMapping()

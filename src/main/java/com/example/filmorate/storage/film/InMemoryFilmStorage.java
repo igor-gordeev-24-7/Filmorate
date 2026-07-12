@@ -23,22 +23,12 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public List<Film> getAllFilms() {
-        if (!films.isEmpty()) {
-            return new ArrayList<>(films.values());
-        }
-        throw new EntityNotFoundException(
-                "Фильмы не найдены",
-                List.of("Cписок пуст"));
+        return new ArrayList<>(films.values());
     }
 
     @Override
     public Film getFilmById(Long id) {
-        if (films.containsKey(id)) {
-            return films.get(id);
-        }
-        throw new EntityNotFoundException(
-                "Фильм с id " + id + " не найден",
-                List.of("Проверьте корректный ли id"));
+        return films.get(id);
     }
 
     @Override
@@ -48,28 +38,16 @@ public class InMemoryFilmStorage implements FilmStorage {
             films.put(id, film);
             return film;
         }
-        throw new EntityNotFoundException(
-                "Фильм с id " + id + " не найден",
-                List.of("Проверьте корректный ли id"));
+       return null;
     }
 
     @Override
     public void deleteFilms() {
-        if (films.isEmpty()) {
-            throw new EntityNotFoundException(
-                    "Записи не найдены",
-                    List.of("Удаление невозможно"));
-        }
         films.clear();
     }
 
     @Override
     public Film deleteFilmById(Long id) {
-        if (films.containsKey(id)) {
-            return films.remove(id);
-        }
-        throw new EntityNotFoundException(
-                "Фильм с id " + id + " не найден",
-                List.of("Проверьте корректный ли id"));
+        return films.remove(id);
     }
 }

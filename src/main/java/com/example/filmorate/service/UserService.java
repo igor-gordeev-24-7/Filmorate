@@ -80,8 +80,8 @@ public class UserService {
 
     // Добавление в друзья (взаимное)
     public void addFriend(Long userId, Long friendId) {
-        User user = userStorage.getUserById(userId);
-        User friend = userStorage.getUserById(friendId);
+        User user = getUserOrThrow(userId);
+        User friend = getUserOrThrow(friendId);
 
         if (user.getFriends() == null) {
             user.setFriends(new HashSet<>());
@@ -96,8 +96,8 @@ public class UserService {
 
     // Удаление из друзей (взаимное)
     public void removeFriend(Long userId, Long friendId) {
-        User user = userStorage.getUserById(userId);
-        User friend = userStorage.getUserById(friendId);
+        User user = getUserOrThrow(userId);
+        User friend = getUserOrThrow(friendId);
 
         if (user.getFriends() == null) {
             user.setFriends(new HashSet<>());
@@ -114,23 +114,30 @@ public class UserService {
 
     // Получение списка друзей пользователя
     public List<User> getFriends(Long userId) {
-        User user = userStorage.getUserById(userId);
+        User user = getUserOrThrow(userId);
+        if (user == null) {
+            throw new EntityNotFoundException(
+                    "Пользователь с id " + userId + " не найден",
+                    List.of("Проверьте корректный ли id"));
+        }
 
-        if (user.getFriends() == null) {
+        if (user.getFriends() == null || user.getFriends().isEmpty()) {
             return List.of();
         }
 
         return user.getFriends().stream()
                 .map(userStorage::getUserById)
+                .filter(friend -> friend != null)
                 .collect(Collectors.toList());
     }
 
     // Получение списка общих друзей
     public List<User> getCommonFriends(Long userId, Long otherUserId) {
-        User user = userStorage.getUserById(userId);
-        User otherUser = userStorage.getUserById(otherUserId);
+        User user = getUserOrThrow(userId);
+        User otherUser = getUserOrThrow(otherUserId);
 
-        if (user.getFriends() == null || otherUser.getFriends() == null) {
+        if (user.getFriends() == null || user.getFriends().isEmpty() ||
+                otherUser.getFriends() == null || otherUser.getFriends().isEmpty()) {
             return List.of();
         }
 
@@ -139,6 +146,7 @@ public class UserService {
 
         return commonFriendsIds.stream()
                 .map(userStorage::getUserById)
+                .filter(friend -> friend != null)
                 .collect(Collectors.toList());
     }
 }

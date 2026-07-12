@@ -71,11 +71,11 @@ public class FilmService {
 
         if (film.getLikes().contains(userId)) {
             film.getLikes().remove(userId);
-        } else {
-            throw new IllegalArgumentException(
-                    String.format("Пользователь с id %d не ставил лайк фильму с id %d", userId, filmId)
-            );
         }
+
+        throw new IllegalArgumentException(
+                String.format("Пользователь с id %d не ставил лайк фильму с id %d", userId, filmId)
+        );
     }
 
     // Получение топ-N популярных фильмов по количеству лайков

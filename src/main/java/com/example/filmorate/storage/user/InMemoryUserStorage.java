@@ -1,6 +1,5 @@
 package com.example.filmorate.storage.user;
 
-import com.example.filmorate.exeption.EntityNotFoundException;
 import com.example.filmorate.model.User;
 import org.springframework.stereotype.Component;
 
@@ -23,22 +22,12 @@ public class InMemoryUserStorage implements UserStorage {
 
     @Override
     public List<User> getAllUsers() {
-        if (!users.isEmpty()) {
-            return new ArrayList<>(users.values());
-        }
-        throw new EntityNotFoundException(
-                "Пользователи не найдены",
-                List.of("Cписок пуст"));
+        return new ArrayList<>(users.values());
     }
 
     @Override
     public User getUserById(Long id) {
-        if (users.containsKey(id)) {
-            return users.get(id);
-        }
-        throw new EntityNotFoundException(
-                "Пользователь с id " + id + " не найден",
-                List.of("Проверьте корректный ли id"));
+        return users.get(id);
     }
 
     @Override
@@ -48,28 +37,16 @@ public class InMemoryUserStorage implements UserStorage {
             users.put(id, user);
             return user;
         }
-        throw new EntityNotFoundException(
-                "Пользователь с id " + id + " не найден",
-                List.of("Проверьте корректный ли id"));
+        return null;
     }
 
     @Override
     public void deleteUsers() {
-        if (users.isEmpty()) {
-            throw new EntityNotFoundException(
-                    "Записи не найдены",
-                    List.of("Удаление невозможно"));
-        }
         users.clear();
     }
 
     @Override
     public User deleteUserById(Long id) {
-        if (users.containsKey(id)) {
-            return users.remove(id);
-        }
-        throw new EntityNotFoundException(
-                "Пользователь с id " + id + " не найден",
-                List.of("Проверьте корректный ли id"));
+        return users.remove(id);
     }
 }

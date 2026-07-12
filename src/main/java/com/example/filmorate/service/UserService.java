@@ -18,6 +18,66 @@ public class UserService {
         this.userStorage = userStorage;
     }
 
+    public User addUser(User user) {
+        return userStorage.addUser(user);
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = userStorage.getAllUsers();
+        if (users.isEmpty()) {
+            throw new EntityNotFoundException(
+                    "Пользователи не найдены",
+                    List.of("Список пользователей пуст"));
+        }
+        return users;
+    }
+
+    public User getUserById(Long id) {
+        User user = userStorage.getUserById(id);
+
+        if (user == null) {
+            throw new EntityNotFoundException(
+                    "Пользователь с id " + id + " не найден",
+                    List.of("Проверьте корректный ли id"));
+        }
+        return user;
+    }
+
+    public User updateUser(Long id, User user) {
+        User updatedUser = userStorage.updateUser(id, user);
+        if (updatedUser == null){
+            throw new EntityNotFoundException(
+                    "Пользователь с id " + id + " не найден",
+                    List.of("Проверьте корректный ли id"));
+        }
+        return updatedUser;
+    }
+
+    public void deleteUsers() {
+        userStorage.deleteUsers();
+    }
+
+    public User deleteUserById(Long id) {
+        User deletedUser = userStorage.deleteUserById(id);
+        if (deletedUser == null) {
+            throw new EntityNotFoundException(
+                    "Пользователь с id " + id + " не найден",
+                    List.of("Проверьте корректный ли id"));
+        }
+       return deletedUser;
+    }
+
+//    Приватный метод для проверки существования пользователя
+    private User getUserOrThrow(Long id) {
+        User user = userStorage.getUserById(id);
+        if (user == null) {
+            throw new EntityNotFoundException(
+                    "Пользователь с id " + id + " не найден",
+                    List.of("Проверьте корректный ли id"));
+        }
+        return user;
+    }
+
     // Добавление в друзья (взаимное)
     public void addFriend(Long userId, Long friendId) {
         User user = userStorage.getUserById(userId);

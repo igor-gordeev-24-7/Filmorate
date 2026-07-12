@@ -30,13 +30,8 @@ public class UserService {
             friend.setFriends(new HashSet<>());
         }
 
-//        if (!user.getFriends().contains(friendId)) {
-
-
-
-            user.getFriends().add(friendId);
-            friend.getFriends().add(userId);
-//        }
+        user.getFriends().add(friendId);
+        friend.getFriends().add(userId);
     }
 
     // Удаление из друзей (взаимное)

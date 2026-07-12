@@ -2,9 +2,7 @@ package com.example.filmorate.controller;
 
 import com.example.filmorate.model.User;
 import com.example.filmorate.service.UserService;
-import com.example.filmorate.storage.user.InMemoryUserStorage;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,41 +14,42 @@ import java.util.Map;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    InMemoryUserStorage inMemoryUserStorage;
-    @Autowired
-    UserService userService;
+    public final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping
     public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
-        User savedUser = inMemoryUserStorage.addUser(user);
+        User savedUser = userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
     @GetMapping
     public Collection<User> getAllUsers() {
-        return inMemoryUserStorage.getAllUsers();
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
-        return inMemoryUserStorage.getUserById(id);
+        return userService.getUserById(id);
     }
 
     @PutMapping()
     public User updateUser(@Valid @RequestBody User user) {
-        return inMemoryUserStorage.updateUser(user.getId(), user);
+        return userService.updateUser(user.getId(), user);
     }
 
     @DeleteMapping()
     public ResponseEntity<Map<String, String>> deleteUsers() {
-        inMemoryUserStorage.deleteUsers();
+        userService.deleteUsers();
         return ResponseEntity.ok(Map.of("message", "Все записи успешно удалены"));
     }
 
     @DeleteMapping("/{id}")
     public User deleteUserById(@PathVariable Long id) {
-        return inMemoryUserStorage.deleteUserById(id);
+        return userService.deleteUserById(id);
     }
 
     @PutMapping("/{id}/friends/{friendId}")

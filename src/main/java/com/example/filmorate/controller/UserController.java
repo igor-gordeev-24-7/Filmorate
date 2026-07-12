@@ -4,6 +4,7 @@ import com.example.filmorate.model.User;
 import com.example.filmorate.service.UserService;
 import com.example.filmorate.storage.user.InMemoryUserStorage;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private final InMemoryUserStorage inMemoryUserStorage;
-    private final UserService userService;
-
-    public UserController(InMemoryUserStorage inMemoryUserStorage, UserService userService) {
-        this.inMemoryUserStorage = inMemoryUserStorage;
-        this.userService = userService;
-    }
+    @Autowired
+    InMemoryUserStorage inMemoryUserStorage;
+    @Autowired
+    UserService userService;
 
     @PostMapping
     public ResponseEntity<User> addUser(@Valid @RequestBody User user) {

@@ -53,8 +53,10 @@ public class UserService {
         return updatedUser;
     }
 
-    public void deleteUsers() {
+    public List<User> deleteUsers() {
+        List<User> deletedUsers = userStorage.getAllUsers();
         userStorage.deleteUsers();
+        return deletedUsers;
     }
 
     public User deleteUserById(Long id) {

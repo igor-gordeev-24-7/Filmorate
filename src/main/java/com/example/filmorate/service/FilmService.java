@@ -20,6 +20,30 @@ public class FilmService {
         this.userStorage = userStorage;
     }
 
+    public Film addFilm(Film film) {
+        return filmStorage.addFilm(film);
+    }
+
+    public List<Film> getAllFilms() {
+        return filmStorage.getAllFilms();
+    }
+
+    public Film getFilmById(Long id) {
+        return filmStorage.getFilmById(id);
+    }
+
+    public Film updateFilm(Long id, Film film) {
+        return filmStorage.updateFilm(id, film);
+    }
+
+    public void deleteFilms() {
+        filmStorage.deleteFilms();
+    }
+
+    public Film deleteFilmById(Long id) {
+        return filmStorage.deleteFilmById(id);
+    }
+
     // Добавление лайка
     public void addLike(Long filmId, Long userId) {
         Film film = filmStorage.getFilmById(filmId);

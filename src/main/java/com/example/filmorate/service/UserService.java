@@ -46,7 +46,7 @@ public class UserService {
             friend.setFriends(new HashSet<>());
         }
 
-        if (!user.getFriends().contains(friendId)) {
+        if (user.getFriends().contains(friendId)) {
             user.getFriends().remove(friendId);
             friend.getFriends().remove(userId);
         }

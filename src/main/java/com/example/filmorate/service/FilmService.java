@@ -1,5 +1,6 @@
 package com.example.filmorate.service;
 
+import com.example.filmorate.exeption.EntityNotFoundException;
 import com.example.filmorate.model.Film;
 import com.example.filmorate.model.User;
 import com.example.filmorate.storage.film.FilmStorage;

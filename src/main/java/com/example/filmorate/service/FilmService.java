@@ -42,6 +42,10 @@ public class FilmService {
                     "Фильм с id " + id + " не найден",
                     List.of("Проверьте корректный ли id"));
         }
+
+        if (film.getLikes() == null) {
+            film.setLikes(new HashSet<>());
+        }
         return film;
     }
 
@@ -74,8 +78,10 @@ public class FilmService {
         Film film = getFilmById(filmId);
         User user = userStorage.getUserById(userId);
 
-        if (film.getLikes() == null) {
-            film.setLikes(new HashSet<>());
+        if (user == null) {
+            throw new EntityNotFoundException(
+                    "Пользователь с id " + userId + " не найден",
+                    List.of("Проверьте корректный ли id"));
         }
 
         if (!film.getLikes().contains(userId)) {
@@ -87,6 +93,12 @@ public class FilmService {
     public void removeLike(Long filmId, Long userId) {
         Film film = getFilmById(filmId);
         User user = userStorage.getUserById(userId);
+
+        if (user == null) {
+            throw new EntityNotFoundException(
+                    "Пользователь с id " + userId + " не найден",
+                    List.of("Проверьте корректный ли id"));
+        }
 
         if (film.getLikes() == null) {
             film.setLikes(new HashSet<>());

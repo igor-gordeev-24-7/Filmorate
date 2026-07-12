@@ -29,7 +29,7 @@ public class Film {
     private String description;
 
     @NotNull
-    @ValidReleaseDate(minDate = "1800-12-12")
+    @ValidReleaseDate(minDate = "1895-12-25")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;
 

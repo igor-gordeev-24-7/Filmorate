@@ -4,6 +4,7 @@ import com.example.filmorate.model.Film;
 import com.example.filmorate.service.FilmService;
 import com.example.filmorate.storage.film.InMemoryFilmStorage;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/films")
 public class FilmController {
-    private final InMemoryFilmStorage inMemoryFilmStorage;
-    private final FilmService filmService;
 
-    public FilmController(InMemoryFilmStorage inMemoryFilmStorage, FilmService filmService) {
-        this.inMemoryFilmStorage = inMemoryFilmStorage;
-        this.filmService = filmService;
-    }
+    @Autowired
+    InMemoryFilmStorage inMemoryFilmStorage;
+    @Autowired
+    FilmService filmService;
 
     @PostMapping
     public ResponseEntity<Film> addFilm(@Valid @RequestBody Film film) {

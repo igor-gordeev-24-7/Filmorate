@@ -39,11 +39,9 @@ public class FilmController {
         return inMemoryFilmStorage.getFilmById(id);
     }
 
-    @PutMapping("/{id}")
-    public Film updateFilm(
-            @PathVariable Long id,
-            @Valid @RequestBody Film film) {
-        return inMemoryFilmStorage.updateFilm(id, film);
+    @PutMapping()
+    public Film updateFilm(@Valid @RequestBody Film film) {
+        return inMemoryFilmStorage.updateFilm(film.getId(), film);
     }
 
     @DeleteMapping()
